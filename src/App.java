@@ -187,8 +187,56 @@ public class App {
      * @postcondición El juego termina cuando {@link #nBarcos1} o {@link #nBarcos2} llega a 0.
      */
     public static void jugarPVP() {
-        // TODO función jugarPVP
+        int x, y;
+        boolean turnoJugador1 = true;
+
+        while (nBarcos1 > 0 && nBarcos2 > 0) {
+
+            if (turnoJugador1) {
+                System.out.println(ANSI_YELLOW + "Turno del Jugador 1" + ANSI_WHITE);
+                mostrarJugador1();
+
+                System.out.print("Ingresa fila: ");
+                x = sc.nextInt();
+                System.out.print("Ingresa columna: ");
+                y = sc.nextInt();
+
+                if (disparar(barcosJ2, x, y)) {
+                    nBarcos2--;
+                    System.out.println(ANSI_GREEN + "Tocado!" + ANSI_WHITE);
+                } else {
+                    System.out.println(ANSI_CYAN + "Agua..." + ANSI_WHITE);
+                }
+
+            } else {
+                System.out.println(ANSI_YELLOW + "Turno del Jugador 2" + ANSI_WHITE);
+                mostrarJugador2();
+
+                System.out.print("Ingresa fila: ");
+                x = sc.nextInt();
+                System.out.print("Ingresa columna: ");
+                y = sc.nextInt();
+
+                if (disparar(barcosJ1, x, y)) {
+                    nBarcos1--;
+                    System.out.println(ANSI_GREEN + "Tocado!" + ANSI_WHITE);
+                } else {
+                    System.out.println(ANSI_CYAN + "Agua..." + ANSI_WHITE);
+                }
+            }
+
+            turnoJugador1 = !turnoJugador1;
+        }
+
+        System.out.println();
+        if (nBarcos1 == 0) {
+            System.out.println(ANSI_RED + "Gana el Jugador 2!!" + ANSI_WHITE);
+        } else {
+            System.out.println(ANSI_RED + "Gana el Jugador 1!!" + ANSI_WHITE);
+        }
     }
+
+
 
     /**
      * Ejecuta el modo Jugador vs Máquina.
@@ -212,9 +260,15 @@ public class App {
      * @postcondición La matriz queda actualizada con el resultado del disparo (6 = tocado, 7 = agua).
      */
     public static boolean disparar(int[][] matriz, int x, int y) {
-        // TODO función disparar
+        if (matriz[x][y] >= 1 && matriz[x][y] <= 5) {
+            matriz[x][y] = 6;
+            return true;
+        } else if (matriz[x][y] == 0) {
+            matriz[x][y] = 7;
+        }
         return false;
     }
+
 
     /**
      * Determina si un barco ha sido tocado o hundido a partir de la casilla disparada.
