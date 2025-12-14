@@ -465,8 +465,36 @@ public class App {
      *
      * @param matriz Tablero a mostrar.
      */
-    public static void mostrarTablero(int[][] matriz) {
-        // TODO función mostrarTablero
+    public static void mostrarTablero(int[][] tablero) {
+        System.out.print("   ");
+        for (int col = 0; col < TAM; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.println();
+
+        for (int fila = 0; fila < TAM; fila++) {
+
+            System.out.print(fila + "  ");
+
+            for (int col = 0; col < TAM; col++) {
+                int casilla = tablero[fila][col];
+                String color = ANSI_WHITE;
+
+                switch (casilla) {
+                    case 0 -> color = ANSI_BLACK;
+                    case 1 -> color = ANSI_CYAN;
+                    case 2 -> color = ANSI_BLUE;
+                    case 3 -> color = ANSI_YELLOW;
+                    case 4 -> color = ANSI_GREEN;
+                    case 5 -> color = ANSI_PURPLE;
+                    case 6 -> color = ANSI_RED; 
+                    case 7 -> color = ANSI_GREY;
+                }
+
+                System.out.print(color + "▄ " + ANSI_WHITE);
+            }
+            System.out.println();
+        }
     }
 
     
@@ -474,13 +502,63 @@ public class App {
      * Muestra el tablero del jugador 1 y el tablero rival, ocultando los barcos enemigos.
      */
     public static void mostrarJugador1() {
-        // TODO función mostrarJugador1
+
+        System.out.println(ANSI_CYAN + "---- Tu Tablero ----" + ANSI_WHITE);
+        mostrarTablero(barcosJ1);
+
+        System.out.println(ANSI_PURPLE + "---- Tablero del Contrincante ----" + ANSI_WHITE);
+        System.out.print(" ");
+        for (int col = 0; col < TAM; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.println();
+
+        for (int fila = 0; fila < TAM; fila++) {
+            System.out.print(fila + "  ");
+            for (int col = 0; col < TAM; col++) {
+                int valor = barcosJ2[fila][col];
+
+                if (valor == 6) {
+                    System.out.print(ANSI_RED + "▄ " + ANSI_WHITE);
+                } else if (valor == 7) {
+                    System.out.print(ANSI_GREY + "▄ " + ANSI_WHITE);
+                } else {
+                    System.out.print(ANSI_BLACK + "▄ " + ANSI_WHITE);
+                }
+            }
+            System.out.println();
+        }
     }
 
     /**
      * Muestra el tablero del jugador 2 y el tablero rival, ocultando los barcos enemigos.
      */
     public static void mostrarJugador2() {
-        // TODO función mostrarJugador2
+
+        System.out.println(ANSI_CYAN + "---- Tu Tablero ----" + ANSI_WHITE);
+        mostrarTablero(barcosJ2);
+
+        System.out.println(ANSI_PURPLE + "---- Tablero del Contrincante ----" + ANSI_WHITE);
+        System.out.print(" ");
+        for (int col = 0; col < TAM; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.println();
+
+        for (int fila = 0; fila < TAM; fila++) {
+            System.out.print(fila + " ");
+            for (int col = 0; col < TAM; col++) {
+                int valor = barcosJ1[fila][col];
+
+                if (valor == 6) {
+                    System.out.print(ANSI_RED + "▄ " + ANSI_WHITE);
+                } else if (valor == 7) {
+                    System.out.print(ANSI_GREY + "▄ " + ANSI_WHITE);
+                } else {
+                    System.out.print(ANSI_BLACK + "▄ " + ANSI_WHITE);
+                }
+            }
+            System.out.println();
+        }
     }
 }
