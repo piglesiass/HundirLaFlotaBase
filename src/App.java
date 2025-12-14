@@ -246,8 +246,50 @@ public class App {
      * @postcondición El juego termina cuando {@link #nBarcos1} o {@link #nBarcos2} llega a 0.
      */
     public static void jugarPVE() {
-        // TODO función jugarPVE
+
+        Random aleatorio = new Random();
+        int filaJugador, colJugador;
+        int filaCPU, colCPU;
+
+        while (nBarcos1 > 0 && nBarcos2 > 0) {
+
+            System.out.println(ANSI_CYAN + "Tu turno:" + ANSI_WHITE);
+            mostrarJugador1();
+
+            System.out.print("Introduce la fila: ");
+            filaJugador = sc.nextInt();
+            System.out.print("Introduce la columna: ");
+            colJugador = sc.nextInt();
+
+            if (disparar(barcosJ2, filaJugador, colJugador)) {
+                nBarcos2--;
+                System.out.println(ANSI_GREEN + "Tocado!" + ANSI_WHITE);
+            } else {
+                System.out.println(ANSI_GREY + "Agua..." + ANSI_WHITE);
+            }
+
+
+            filaCPU = aleatorio.nextInt(TAM);
+            colCPU = aleatorio.nextInt(TAM);
+
+            System.out.println(ANSI_PURPLE + "La Máquina dispara a: (" + filaCPU + "," + colCPU + ")" + ANSI_WHITE);
+
+            if (disparar(barcosJ1, filaCPU, colCPU)) {
+                nBarcos1--;
+                System.out.println(ANSI_RED + "Han tocado tu barco!" + ANSI_WHITE);
+            } else {
+                System.out.println(ANSI_GREY + "Han fallado." + ANSI_WHITE);
+            }
+        }
+
+    
+        if (nBarcos1 == 0) {
+            System.out.println(ANSI_RED + "Has perdido..." + ANSI_WHITE);
+        } else {
+            System.out.println(ANSI_GREEN + "Enhorabuena! ¡Has ganado!" + ANSI_WHITE);
+        }
     }
+
 
     /**
      * Realiza un disparo sobre el tablero especificado.
