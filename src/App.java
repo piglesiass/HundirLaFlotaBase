@@ -93,8 +93,29 @@ public class App {
      * @return Opción elegida por el usuario: 0 = Salir, 1 = PVP, 2 = PVE.
      */
     public static int menuJuego() {
-        // TODO función menuJuego
-        return 0;
+
+        int opcion;
+
+        System.out.println();
+        System.out.println(ANSI_BLUE + "==============================");
+        System.out.println(ANSI_BLUE + "      HUNDIR LA FLOTA");
+        System.out.println(ANSI_BLUE + "==============================" + ANSI_WHITE);
+
+        System.out.println(ANSI_YELLOW + " 1 " + ANSI_WHITE + "- PvP");
+        System.out.println(ANSI_CYAN   + " 2 " + ANSI_WHITE + "- PvE");
+        System.out.println(ANSI_GREEN  + " 0 " + ANSI_WHITE + "- Salir");
+        System.out.println();
+
+        System.out.print("Selecciona una opcion: ");
+        opcion = sc.nextInt();
+
+        while (opcion < 0 || opcion > 2) {
+            System.out.println(ANSI_RED + "Opcion no valida." + ANSI_WHITE);
+            System.out.print("Vuelve a introducir una opcion: ");
+            opcion = sc.nextInt();
+        }
+
+        return opcion;
     }
 
     /**
