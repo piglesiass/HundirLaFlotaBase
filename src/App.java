@@ -133,8 +133,34 @@ public class App {
      * @postcondición Los tableros de los jugadores están generados y el juego inicia en el modo seleccionado.
      */
     public static void prepararJuego() {
-        // TODO función prepararJuego
+
+        barcosJ1 = generarTablero();
+        barcosJ2 = generarTablero();
+
+        nBarcos1 = calcularNBarcos(cantidad, tamanios);
+        nBarcos2 = calcularNBarcos(cantidad, tamanios);
+
+        System.out.println(ANSI_GREEN + "Tablero del Jugador 1 cargado correctamente." + ANSI_WHITE);
+        System.out.println(ANSI_GREEN + "Tablero del Jugador 2 cargado correctamente." + ANSI_WHITE);
+
+        int modoJuego = menuJuego();
+
+        switch (modoJuego) {
+            case 1:
+                System.out.println(ANSI_YELLOW + "Modo PvP seleccionado" + ANSI_WHITE);
+                jugarPVP();
+                break;
+
+            case 2:
+                System.out.println(ANSI_YELLOW + "Modo PvE seleccionado" + ANSI_WHITE);
+                jugarPVE();
+                break;
+
+            default:
+                System.out.println(ANSI_RED + "Saliendo..." + ANSI_WHITE);
+        }
     }
+
 
     /**
      * Calcula el número total de casillas de barco dadas las cantidades y tamaños de barcos.
