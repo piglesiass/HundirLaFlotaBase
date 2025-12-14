@@ -375,11 +375,30 @@ public class App {
      * @param y Columna de la posición a comprobar.
      * @return {@code true} si la posición y sus adyacentes están libres, {@code false} en caso contrario.
      */
-    public static boolean comprobarPosicion(int x, int y) {
-        // TODO función comprobarPosición
+    public static boolean comprobarPosicion(int fila, int col) {
 
-        return false;
+        if (fila < 0 || fila >= TAM || col < 0 || col >= TAM) {
+            return false;
+        }
+
+        if (matrizAux[fila][col] != 0) {
+            return false;
+        }
+
+        for (int i = 0; i < direcciones.length; i++) {
+            int nuevaFila = fila + direcciones[i][0];
+            int nuevaCol = col + direcciones[i][1];
+
+            if (nuevaFila >= 0 && nuevaFila < TAM && nuevaCol >= 0 && nuevaCol < TAM) {
+                if (matrizAux[nuevaFila][nuevaCol] != 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
+
 
     /**
      * Determina una dirección viable para colocar un barco de tamaño dado desde (x,y).
